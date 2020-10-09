@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Trendz</string>
+    <string name="trending_list">Trending List</string>
+    <string name="search_list">Search List</string>
+</resources>

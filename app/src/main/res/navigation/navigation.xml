@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/trendingRepositoryFragment">
+
+    <fragment
+        android:id="@+id/trendingRepositoryFragment"
+        android:name="com.vs.trendz.fragments.repoTrendFragment.TrendingRepositoryFragment"
+        android:label="trending_repository_fragment"
+        tools:layout="@layout/trending_repository_fragment" />
+    <fragment
+        android:id="@+id/searchRepoFragment"
+        android:name="com.vs.trendz.fragments.searchRepoFragment.SearchRepoFragment"
+        android:label="search_repo_fragment"
+        tools:layout="@layout/search_repo_fragment" />
+</navigation>
