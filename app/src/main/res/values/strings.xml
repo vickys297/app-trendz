@@ -2,4 +2,7 @@
     <string name="app_name">Trendz</string>
     <string name="trending_list">Trending List</string>
     <string name="search_list">Search List</string>
+    <string name="toolbar_title">Trending Repositories</string>
+    <string name="search">Search</string>
+    <string name="trending_repository">Trending Repository</string>
 </resources>
