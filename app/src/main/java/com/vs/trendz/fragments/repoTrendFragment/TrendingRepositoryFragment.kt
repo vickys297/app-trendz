@@ -2,6 +2,7 @@ package com.vs.trendz.fragments.repoTrendFragment
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -15,6 +16,7 @@ import com.vs.trendz.databinding.TrendingRepositoryFragmentBinding
 import com.vs.trendz.fragments.CommonViewModelFactory
 import com.vs.trendz.fragments.repoTrendFragment.adapter.TrendingListAdapter
 import com.vs.trendz.model.TrendingRepositoryResponseData
+import kotlinx.android.synthetic.main.search_repo_fragment.*
 import kotlinx.android.synthetic.main.trending_repository_fragment.*
 
 class TrendingRepositoryFragment : Fragment() {
@@ -66,6 +68,8 @@ class TrendingRepositoryFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+
         adapter = TrendingListAdapter(requireContext())
         showLoadingState()
         setupObserver()
@@ -106,6 +110,7 @@ class TrendingRepositoryFragment : Fragment() {
         when (item.itemId) {
             R.id.id_search -> {
                 findNavController().navigate(R.id.action_trendingRepositoryFragment_to_searchRepoFragment)
+                return true
             }
             else -> {
 

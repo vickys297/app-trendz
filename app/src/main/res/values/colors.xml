@@ -3,4 +3,5 @@
     <color name="colorPrimary">#fff</color>
     <color name="colorPrimaryDark">#fff</color>
     <color name="colorAccent">#07689f</color>
+    <color name="star_color">#FFC107</color>
 </resources>

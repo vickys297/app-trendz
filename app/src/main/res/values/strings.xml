@@ -5,4 +5,8 @@
     <string name="toolbar_title">Trending Repositories</string>
     <string name="search">Search</string>
     <string name="trending_repository">Trending Repository</string>
+    <string name="programming">Programming</string>
+    <string name="description">Description</string>
+    <string name="author_name">Author Name</string>
+    <string name="project_name">Project Name</string>
 </resources>

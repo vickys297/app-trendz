@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         // set data binding
         binding = DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
-        setSupportActionBar(toolbar)
         navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController

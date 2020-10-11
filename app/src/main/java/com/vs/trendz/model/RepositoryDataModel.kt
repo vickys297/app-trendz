@@ -14,6 +14,7 @@ data class TrendingRepositoryResponseData(
     @ColumnInfo(name = "url") val url: String,
     @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "language") val language: String,
+    @ColumnInfo(name = "languageColor") val languageColor: String,
     @ColumnInfo(name = "stars") val stars: Int,
     @ColumnInfo(name = "forks") val forks: Int,
     @ColumnInfo(name = "currentPeriodStars") val currentPeriodStars: Int,

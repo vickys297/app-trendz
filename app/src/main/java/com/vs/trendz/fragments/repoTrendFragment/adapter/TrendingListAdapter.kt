@@ -1,6 +1,10 @@
 package com.vs.trendz.fragments.repoTrendFragment.adapter
 
+
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.ShapeDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.vs.trendz.databinding.ListItemTrendingRepoBinding
 import com.vs.trendz.model.TrendingRepositoryResponseData
 import kotlinx.android.synthetic.main.list_item_trending_repo.view.*
+
 
 class TrendingListAdapter(
     val context: Context
@@ -47,6 +52,10 @@ class TrendingListAdapter(
                     .centerCrop()
                     .into(itemView.imageView)
 
+                val shape = GradientDrawable()
+                shape.shape = GradientDrawable.OVAL
+                shape.setColor(Color.parseColor(item.languageColor))
+                itemView.colorIndicator.background = shape
             }
         }
     }
