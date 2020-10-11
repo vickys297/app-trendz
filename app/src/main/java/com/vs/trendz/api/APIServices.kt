@@ -6,7 +6,6 @@ import retrofit2.http.GET
 
 interface APIServices {
 
-
     @GET("repositories")
     fun getTrendingList(): Call<ArrayList<TrendingRepositoryResponseData>>
 

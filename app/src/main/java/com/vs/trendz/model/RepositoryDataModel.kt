@@ -2,12 +2,20 @@ package com.vs.trendz.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "repo_local")
+/*
+* Data model for local storage and for api response data
+*
+* Unique for avoiding duplicate project name
+* */
+
+
+@Entity(tableName = "repo_local", indices = [Index(value = ["name"], unique = true)])
 data class TrendingRepositoryResponseData(
-    @PrimaryKey(autoGenerate = true) val id : Int = 0,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "author") val author: String,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "avatar") val avatar: String,

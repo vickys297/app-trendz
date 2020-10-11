@@ -3,25 +3,37 @@ package com.vs.trendz.fragments
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.vs.trendz.MainActivityViewModel
 import com.vs.trendz.fragments.repoTrendFragment.TrendingRepositoryViewModel
-import com.vs.trendz.fragments.searchRepoFragment.SearchRepoViewModel
+import com.vs.trendz.fragments.noNetworkFragment.NoNetworkConnectionViewModel
 import com.vs.trendz.repository.CommonRepository
 import com.vs.trendz.roomdb.AppDatabase
+import com.vs.trendz.util.NetworkStatus
 
 class CommonViewModelFactory(private val context: Context?) : ViewModelProvider.Factory {
 
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when (modelClass.simpleName) {
-            "TrendingRepositoryViewModel" -> {
+            TrendingRepositoryViewModel::class.java.simpleName -> {
                 TrendingRepositoryViewModel(
-                    CommonRepository.getInstance(context!!, AppDatabase.getInstance(context)),
+                    CommonRepository.getInstance(context!!, AppDatabase.getInstance(context), NetworkStatus.getInstance(context)),
+                    context.applicationContext
+                ) as T
+            }
+            MainActivityViewModel::class.java.simpleName -> {
+                MainActivityViewModel(
+                    CommonRepository.getInstance(context!!, AppDatabase.getInstance(context), NetworkStatus.getInstance(context)),
                     context.applicationContext
                 ) as T
             }
             else -> {
-                SearchRepoViewModel(
-                    CommonRepository.getInstance(context!!, AppDatabase.getInstance(context)),
+                NoNetworkConnectionViewModel(
+                    CommonRepository.getInstance(
+                        context!!,
+                        AppDatabase.getInstance(context),
+                        NetworkStatus.getInstance(context)
+                    ),
                     context.applicationContext
                 ) as T
             }

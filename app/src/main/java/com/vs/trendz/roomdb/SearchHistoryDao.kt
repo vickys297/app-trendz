@@ -10,10 +10,10 @@ import com.vs.trendz.model.TrendingRepositoryResponseData
 @Dao
 interface SearchHistoryDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertIntoLocalHistory(responseData: ArrayList<TrendingRepositoryResponseData>)
 
-    @Query("SELECT * FROM repo_local LIMIT 10")
+    @Query("SELECT * FROM repo_local")
     fun getAllLocalRepo(): List<TrendingRepositoryResponseData>
 
 }

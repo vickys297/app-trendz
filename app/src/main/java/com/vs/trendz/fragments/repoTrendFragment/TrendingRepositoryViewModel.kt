@@ -3,7 +3,6 @@ package com.vs.trendz.fragments.repoTrendFragment
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.vs.trendz.model.TrendingRepositoryResponseData
 import com.vs.trendz.repository.CommonRepository
@@ -17,19 +16,22 @@ class TrendingRepositoryViewModel internal constructor(
     val responseRepositoryData = MutableLiveData<ArrayList<TrendingRepositoryResponseData>>()
 
 
-    fun getTrendingRepoList(): MutableLiveData<ArrayList<TrendingRepositoryResponseData>> {
+    // request for new data from remote server
+    fun requestTrendingRepoList(): MutableLiveData<ArrayList<TrendingRepositoryResponseData>> {
         println("getTrendingRepoList")
-        repository.getTrendingRepository(responseRepositoryData)
+        repository.requestTrendingRepoList(responseRepositoryData)
         return responseRepositoryData
     }
 
-    fun insertIntoLocalSearch(arrayList: ArrayList<TrendingRepositoryResponseData>) {
-        repository.insertIntoLocalDatabase(arrayList).execute()
+    // insert new data from local database
+    fun insertTrendingRepositoryInLocalDatabase(arrayList: ArrayList<TrendingRepositoryResponseData>) {
+        repository.InsertIntoLocalDatabase(arrayList).execute()
     }
 
 
-    fun getAllDetails(): List<TrendingRepositoryResponseData> {
-        return repository.getAllData().execute().get()
+    // get all data from local server
+    fun getAllDetailsFromLocal(): List<TrendingRepositoryResponseData> {
+        return repository.GetAllData().execute().get()
     }
 
 }

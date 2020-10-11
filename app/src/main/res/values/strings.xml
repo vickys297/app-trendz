@@ -9,4 +9,10 @@
     <string name="description">Description</string>
     <string name="author_name">Author Name</string>
     <string name="project_name">Project Name</string>
+    <string name="try_again">Try again</string>
+    <string name="no_network_connection">No network connection</string>
+    <string name="error_state_message">Something went wrong, try again later</string>
+    <string name="data_update_success">List Updated</string>
+    <string name="data_update_failed">Unable to refresh data, please try again</string>
+    <string name="alert_no_network">Please check your data connection</string>
 </resources>

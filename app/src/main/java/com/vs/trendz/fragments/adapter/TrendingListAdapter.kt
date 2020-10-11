@@ -1,24 +1,34 @@
-package com.vs.trendz.fragments.repoTrendFragment.adapter
+package com.vs.trendz.fragments.adapter
 
 
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.ShapeDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.vs.trendz.databinding.ListItemTrendingRepoBinding
 import com.vs.trendz.model.TrendingRepositoryResponseData
 import kotlinx.android.synthetic.main.list_item_trending_repo.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
-
+/*
+* Recycler view with filterable
+* */
 class TrendingListAdapter(
     val context: Context
-) : RecyclerView.Adapter<TrendingListAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<TrendingListAdapter.ViewHolder>(), Filterable {
 
+
+    // used to filtered data
     private var responseRepositoryData = ArrayList<TrendingRepositoryResponseData>()
+
+    // default array
+    private var responseRepositoryAllData = ArrayList<TrendingRepositoryResponseData>()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -46,11 +56,15 @@ class TrendingListAdapter(
                 itemView.tv_programming_language.text = item.language
                 itemView.tv_star_count.text = item.stars.toString()
 
+
                 Glide
                     .with(holder.itemView)
                     .load(item.avatar)
                     .centerCrop()
                     .into(itemView.imageView)
+
+
+                /*creating dynamic drawable as color indicator*/
 
                 val shape = GradientDrawable()
                 shape.shape = GradientDrawable.OVAL
@@ -66,8 +80,9 @@ class TrendingListAdapter(
 
     fun updateList(it: ArrayList<TrendingRepositoryResponseData>) {
         responseRepositoryData = it
+        responseRepositoryAllData = ArrayList(it)
+        notifyDataSetChanged()
     }
-
 
     class ViewHolder(private val binding: ListItemTrendingRepoBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -78,6 +93,43 @@ class TrendingListAdapter(
                 executePendingBindings()
             }
         }
+    }
 
+    override fun getFilter(): Filter {
+
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+
+                val filterList = ArrayList<TrendingRepositoryResponseData>()
+
+                // if search string is empty show all items in array
+                if (constraint == null || constraint.isEmpty()) {
+                    filterList.addAll(responseRepositoryAllData)
+                } else {
+
+                    // if search string is not empty show filtered items
+                    val searchString = constraint.toString().toLowerCase(Locale.getDefault()).trim()
+
+                    for (item: TrendingRepositoryResponseData in responseRepositoryAllData) {
+                        if (item.name.toLowerCase(Locale.getDefault()).contains(searchString)) {
+                            filterList.add(item)
+                        }
+                    }
+                }
+
+                val filterResult = FilterResults()
+                filterResult.values = filterList
+                return filterResult
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+
+                // append results
+                responseRepositoryData.clear()
+                responseRepositoryData.addAll(results!!.values as ArrayList<TrendingRepositoryResponseData>)
+                notifyDataSetChanged()
+            }
+
+        }
     }
 }

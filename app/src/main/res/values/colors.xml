@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#fff</color>
     <color name="colorPrimaryDark">#fff</color>
-    <color name="colorAccent">#07689f</color>
+    <color name="colorAccent">#1089ff</color>
     <color name="star_color">#FFC107</color>
+    <color name="secondaryColor">#1089ff</color>
 </resources>

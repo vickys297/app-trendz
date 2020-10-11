@@ -4,8 +4,39 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@android:color/black</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="try_again">
+        <item name="android:backgroundTint">@android:color/white</item>
+        <item name="android:textColor">@color/secondaryColor</item>
+    </style>
+
+
+    <style name="no_network_connection">
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="error_state_text">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="splashScreenText">
+        <item name="android:textSize">80sp</item>
+        <item name="android:text">Hello</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="splashScreenSubText">
+        <item name="android:textSize">30sp</item>
+        <item name="android:text">Github Trends</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold|italic</item>
+    </style>
 
 </resources>
