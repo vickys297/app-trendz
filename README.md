@@ -8,6 +8,8 @@ particular project name on search fields. The app show project details like name
 
 # Project Overview
 
+Developed using MVVM architecture and used binding for view. Navigation architecture used for fragment transitions. Roomdb used for offline storage and data retrieval for supporting offline. Network connection is checked before every api call. Retrofit library used for remote api call and OkHttp as client for api session handling and Gson for conversion between objects and json. Search view used as search filter along with Filterable Interface.
+
 1. On start check local database for data if available or if not available sync with remote sever once if network available. Then show trending list with search view.
 2. On start if no network just display the trending list from the local server. If user try to refresh the data show no network error message.
 3. On start if no network and no data available the directly show no network available. Once network is available sync with remote server and show trending list.
