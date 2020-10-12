@@ -23,9 +23,6 @@ class TrendingListAdapter(
     // used to filtered data
     private var responseRepositoryData = ArrayList<TrendingRepositoryResponseData>()
 
-    // default array
-    private var responseRepositoryAllData = ArrayList<TrendingRepositoryResponseData>()
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -78,7 +75,6 @@ class TrendingListAdapter(
 
     fun updateList(it: ArrayList<TrendingRepositoryResponseData>) {
         responseRepositoryData = it
-        responseRepositoryAllData = ArrayList(it)
         notifyDataSetChanged()
     }
 

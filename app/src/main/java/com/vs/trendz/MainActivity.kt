@@ -10,7 +10,6 @@ import androidx.navigation.fragment.NavHostFragment
 import com.vs.trendz.databinding.ActivityMainBinding
 import com.vs.trendz.fragments.CommonViewModelFactory
 import com.vs.trendz.model.TrendingRepositoryResponseData
-import com.vs.trendz.util.NetworkStatus
 
 class MainActivity : AppCompatActivity() {
 
@@ -67,8 +66,7 @@ class MainActivity : AppCompatActivity() {
         * */
 
 
-        val networkStatus = NetworkStatus.getInstance(this@MainActivity)
-            .connectionAvailable()
+        val networkStatus = mainActivityViewModel.checkNetworkConnection()
 
         if (networkStatus && !localData.isNullOrEmpty()) {
 

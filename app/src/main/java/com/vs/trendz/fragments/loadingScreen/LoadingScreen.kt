@@ -14,7 +14,6 @@ import com.vs.trendz.R
 import com.vs.trendz.databinding.LoadingScreenFragmentBinding
 import com.vs.trendz.fragments.CommonViewModelFactory
 import com.vs.trendz.model.TrendingRepositoryResponseData
-import com.vs.trendz.util.NetworkStatus
 import kotlinx.android.synthetic.main.loading_screen_fragment.*
 
 class LoadingScreen : Fragment() {
@@ -67,7 +66,7 @@ class LoadingScreen : Fragment() {
     }
 
     private fun requestTrendingRepoData() {
-        if (NetworkStatus.getInstance(requireContext()).connectionAvailable()) {
+        if (viewModel.checkNetworkConnection()) {
 
             // try requesting data
             viewModel.requestTrendingRepoList().observe(viewLifecycleOwner, observer)

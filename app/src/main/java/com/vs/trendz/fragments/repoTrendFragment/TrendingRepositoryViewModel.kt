@@ -34,4 +34,8 @@ class TrendingRepositoryViewModel internal constructor(
         return repository.GetAllData().execute().get()
     }
 
+    fun checkNetworkConnection(): Boolean {
+        return repository.networkConnection.connectionAvailable()
+    }
+
 }

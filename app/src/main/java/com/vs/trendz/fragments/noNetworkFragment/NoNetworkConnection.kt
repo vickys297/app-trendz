@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.vs.trendz.R
 import com.vs.trendz.databinding.SearchRepoFragmentBinding
 import com.vs.trendz.fragments.CommonViewModelFactory
-import com.vs.trendz.util.NetworkStatus
 import kotlinx.android.synthetic.main.search_repo_fragment.*
 
 /*
@@ -64,7 +63,7 @@ class NoNetworkConnection : Fragment() {
         super.onResume()
 
         binding.btnTryagain.setOnClickListener {
-            if (NetworkStatus.getInstance(requireContext()).connectionAvailable()) {
+            if (viewModel.checkNetworkConnection()) {
 
                 // just navigate back to the start fragment
                 findNavController().navigateUp()

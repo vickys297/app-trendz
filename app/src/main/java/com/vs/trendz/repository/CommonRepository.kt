@@ -27,6 +27,7 @@ class CommonRepository private constructor(
 ) {
 
     val searchHistoryDao = appDatabase.searchHistoryDao()
+    val networkConnection = networkStatus
 
 
     companion object {

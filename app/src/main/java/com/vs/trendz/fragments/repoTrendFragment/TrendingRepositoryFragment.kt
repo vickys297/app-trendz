@@ -21,7 +21,6 @@ import com.vs.trendz.databinding.TrendingRepositoryFragmentBinding
 import com.vs.trendz.fragments.CommonViewModelFactory
 import com.vs.trendz.fragments.adapter.TrendingListAdapter
 import com.vs.trendz.model.TrendingRepositoryResponseData
-import com.vs.trendz.util.NetworkStatus
 import kotlinx.android.synthetic.main.trending_repository_fragment.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -124,7 +123,7 @@ class TrendingRepositoryFragment : Fragment(), Filterable {
     }
 
     private fun checkNetworkConnection() {
-        if (NetworkStatus.getInstance(requireContext()).connectionAvailable()) {
+        if (viewModel.checkNetworkConnection()) {
 
             // get data from remote server
             viewModel.requestTrendingRepoList()

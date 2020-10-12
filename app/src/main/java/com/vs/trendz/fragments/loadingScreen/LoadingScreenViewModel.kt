@@ -24,4 +24,8 @@ class LoadingScreenViewModel internal constructor
         return responseRepositoryData
     }
 
+    fun checkNetworkConnection(): Boolean {
+        return repository.networkConnection.connectionAvailable()
+    }
+
 }
