@@ -2,8 +2,8 @@
 Android Application for Github Trending Repository
 
 # Description
-This application developed for listing the trending repository list from the remote(Link bellow). The application supports offline storage. User can search for the 
-perticuar project name on search fileds. The app show project details like name, author, built by and simple description.
+This application is developed for listing the trending github repository list from the remote(Link bellow). The application supports offline storage. User can search for the 
+particular project name on search fields. The app show project details like name, author, built by and simple description.
 
 
 # Technical 
@@ -20,16 +20,16 @@ Room database for the local database, as this app supports offline also data is 
     kapt "androidx.room:room-compiler:2.2.5"
     implementation "androidx.room:room-ktx:2.2.5"
 
-Retrofit for the api call and GSON for convertion.
+Retrofit for the api call and GSON for conversion.
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.6.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
     implementation 'com.google.code.gson:gson:2.8.6'
 
-Glide for image
-
-   // glide
+Glide for media management
+    
+    //glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     
