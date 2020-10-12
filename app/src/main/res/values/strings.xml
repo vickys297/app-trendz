@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Trendz</string>
+    <string name="app_name">Github Trending</string>
     <string name="trending_list">Trending List</string>
     <string name="search_list">Search List</string>
     <string name="toolbar_title">Trending Repositories</string>
@@ -10,9 +10,13 @@
     <string name="author_name">Author Name</string>
     <string name="project_name">Project Name</string>
     <string name="try_again">Try again</string>
-    <string name="no_network_connection">No network connection</string>
-    <string name="error_state_message">Something went wrong, try again later</string>
-    <string name="data_update_success">List Updated</string>
-    <string name="data_update_failed">Unable to refresh data, please try again</string>
+
+
+    <string name="error_state_message">Something went wrong, please try again later</string>
+    <string name="data_update_failed">@string/error_state_message</string>
+
+    <string name="data_update_success">Sync successful</string>
+
     <string name="alert_no_network">Please check your data connection</string>
+    <string name="no_network_connection">@string/alert_no_network</string>
 </resources>

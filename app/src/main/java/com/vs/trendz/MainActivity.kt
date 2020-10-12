@@ -84,8 +84,9 @@ class MainActivity : AppCompatActivity() {
             // stop progress bar
             binding.progressBar.visibility = View.GONE
 
-            // show content
-            setupController()
+            // get data from remote server and sync once
+            mainActivityViewModel.requestTrendingRepoList()
+
 
         }
 
@@ -108,6 +109,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showNoDataMessage() {
+        binding.networkIssueText.visibility = View.VISIBLE
         Toast.makeText(
             this@MainActivity,
             getString(R.string.data_update_failed),
@@ -116,6 +118,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupController() {
+        binding.networkIssueText.visibility = View.GONE
         navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
