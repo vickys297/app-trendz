@@ -2,10 +2,8 @@ package com.vs.trendz
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -29,13 +27,19 @@ class MainActivity : AppCompatActivity() {
 
         // set data binding
         binding = DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
-        binding.progressBar.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.GONE
 
         setupViewModel()
-        setupObserver()
+        setupController()
     }
 
 
+    private fun setupController() {
+        binding.networkIssueText.visibility = View.GONE
+        navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+    }
 
     override fun onResume() {
         super.onResume()
@@ -44,85 +48,49 @@ class MainActivity : AppCompatActivity() {
         val localData =
             mainActivityViewModel.getAllDetailsFromLocal() as ArrayList<TrendingRepositoryResponseData>
 
-
         /*
-        * Check if Network and local data available
-        * No:
-        * setup nav controller and got to no network fragment and download content
+        * if Network and local data available
+        * then:
+        * show loading and sync data with remote serve
         *
-        * else check local storage data is empty
-        * Yes:
-        * request for new data
+        * else if check no network and local storage data available
+        * then:
+        * show offline data
+        *
+        * else if check if network available and data not available
+        * then:
+        * show loading screen and sync with remote serve
         *
         * else
-        * stop progress bar and setup controller and default destination to trending repository
+        * show no network connection from loading fragment
         *
         * */
 
 
-        if (!NetworkStatus.getInstance(this@MainActivity)
-                .connectionAvailable() && localData.isNullOrEmpty()
-        ) {
+        val networkStatus = NetworkStatus.getInstance(this@MainActivity)
+            .connectionAvailable()
 
-            // stop progress bar
-            binding.progressBar.visibility = View.GONE
+        if (networkStatus && !localData.isNullOrEmpty()) {
 
-            // set controller and redirect to no network fragment
-            setupController()
-            // redirect
-            showNoNetworkConnection()
+            //show trending list
+            showLoadingScreenFragment()
+        } else if (!networkStatus && !localData.isNullOrEmpty()) {
 
-        } else if (localData.isNullOrEmpty()) {
+            // show trending list
+            showTrendingRepoList()
+        } else if (networkStatus && localData.isNullOrEmpty()) {
 
-
-            // get data from remote server
-            mainActivityViewModel.requestTrendingRepoList()
-
-
+            // show loading screen
+            showLoadingScreenFragment()
         } else {
 
-            // stop progress bar
-            binding.progressBar.visibility = View.GONE
-
-            // get data from remote server and sync once
-            mainActivityViewModel.requestTrendingRepoList()
-
-
+            // show no network
+            showNoDataAndNetworkConnection()
         }
 
+
     }
 
-
-    private fun setupObserver() {
-        mainActivityViewModel.responseRepositoryData.observe(this@MainActivity, Observer {
-
-            // stop progress bar
-            binding.progressBar.visibility = View.GONE
-
-            if (!it.isNullOrEmpty()) {
-                mainActivityViewModel.insertTrendingRepositoryInLocalDatabase(it)
-                setupController()
-            } else {
-                showNoDataMessage()
-            }
-        })
-    }
-
-    private fun showNoDataMessage() {
-        binding.networkIssueText.visibility = View.VISIBLE
-        Toast.makeText(
-            this@MainActivity,
-            getString(R.string.data_update_failed),
-            Toast.LENGTH_SHORT
-        ).show()
-    }
-
-    private fun setupController() {
-        binding.networkIssueText.visibility = View.GONE
-        navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
-    }
 
     private fun setupViewModel() {
 
@@ -138,11 +106,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun showNoNetworkConnection() {
-
-        // redirect to no network fragment
-        navController.navigate(R.id.action_trendingRepositoryFragment_to_noNetworkConnectionFragment)
+    private fun showLoadingScreenFragment() {
+        // redirect to loading fragment
+        navController.popBackStack()
+        navController.navigate(R.id.loadingScreen)
     }
 
+
+    private fun showTrendingRepoList() {
+        // redirect to trending fragment
+        navController.popBackStack()
+        navController.navigate(R.id.trendingRepositoryFragment)
+
+    }
+
+
+    private fun showNoDataAndNetworkConnection() {
+        // redirect to no network fragment from loading page
+        navController.navigate(R.id.action_loadingScreen_to_noNetworkConnectionFragment)
+    }
 }

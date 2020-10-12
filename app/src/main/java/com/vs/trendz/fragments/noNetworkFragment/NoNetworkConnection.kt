@@ -66,8 +66,8 @@ class NoNetworkConnection : Fragment() {
         binding.btnTryagain.setOnClickListener {
             if (NetworkStatus.getInstance(requireContext()).connectionAvailable()) {
 
-                // redirect to home destination page
-                findNavController().navigate(R.id.action_searchRepoFragment_to_navigation)
+                // just navigate back to the start fragment
+                findNavController().navigateUp()
             } else {
 
                 // show alert to check connection

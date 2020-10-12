@@ -10,6 +10,7 @@ import com.vs.trendz.model.TrendingRepositoryResponseData
 @Dao
 interface SearchHistoryDao {
 
+    // on conflict replaced new values
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertIntoLocalHistory(responseData: ArrayList<TrendingRepositoryResponseData>)
 

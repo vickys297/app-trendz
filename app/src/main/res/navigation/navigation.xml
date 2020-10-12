@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/trendingRepositoryFragment">
+    app:startDestination="@id/loadingScreen">
 
     <fragment
         android:id="@+id/trendingRepositoryFragment"
@@ -14,7 +14,7 @@
             android:id="@+id/action_trendingRepositoryFragment_to_noNetworkConnectionFragment"
             app:destination="@id/noNetworkConnectionFragment"
             app:launchSingleTop="true"
-            app:popUpTo="@+id/navigation"
+            app:popUpTo="@id/trendingRepositoryFragment"
             app:popUpToInclusive="true" />
     </fragment>
 
@@ -22,21 +22,18 @@
         android:id="@+id/noNetworkConnectionFragment"
         android:name="com.vs.trendz.fragments.noNetworkFragment.NoNetworkConnection"
         android:label="search_repo_fragment"
-        tools:layout="@layout/search_repo_fragment">
-
+        tools:layout="@layout/search_repo_fragment" />
+    <fragment
+        android:id="@+id/loadingScreen"
+        android:name="com.vs.trendz.fragments.loadingScreen.LoadingScreen"
+        android:label="loading_screen_fragment"
+        tools:layout="@layout/loading_screen_fragment">
         <action
-            android:id="@+id/action_searchRepoFragment_to_trendingRepositoryFragment"
-            app:destination="@id/trendingRepositoryFragment"
+            android:id="@+id/action_loadingScreen_to_noNetworkConnectionFragment"
+            app:destination="@id/noNetworkConnectionFragment"
             app:launchSingleTop="true"
-            app:popUpTo="@+id/navigation"
-            app:popUpToInclusive="true"/>
-
-        <action
-            android:id="@+id/action_searchRepoFragment_to_navigation"
-            app:destination="@id/navigation"
-            app:launchSingleTop="true"
-            app:popUpTo="@+id/navigation"
-            app:popUpToInclusive="true"/>
+            app:popUpTo="@id/loadingScreen"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

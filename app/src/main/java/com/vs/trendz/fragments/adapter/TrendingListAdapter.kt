@@ -6,22 +6,18 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.vs.trendz.databinding.ListItemTrendingRepoBinding
 import com.vs.trendz.model.TrendingRepositoryResponseData
 import kotlinx.android.synthetic.main.list_item_trending_repo.view.*
-import java.util.*
-import kotlin.collections.ArrayList
 
 /*
-* Recycler view with filterable
+* Recycler view
 * */
 class TrendingListAdapter(
     val context: Context
-) : RecyclerView.Adapter<TrendingListAdapter.ViewHolder>(), Filterable {
+) : RecyclerView.Adapter<TrendingListAdapter.ViewHolder>() {
 
 
     // used to filtered data
@@ -64,7 +60,9 @@ class TrendingListAdapter(
                     .into(itemView.imageView)
 
 
-                /*creating dynamic drawable as color indicator*/
+                /*
+                    creating dynamic drawable as color indicator
+                */
 
                 val shape = GradientDrawable()
                 shape.shape = GradientDrawable.OVAL
@@ -92,44 +90,6 @@ class TrendingListAdapter(
                 dataModel = item
                 executePendingBindings()
             }
-        }
-    }
-
-    override fun getFilter(): Filter {
-
-        return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-
-                val filterList = ArrayList<TrendingRepositoryResponseData>()
-
-                // if search string is empty show all items in array
-                if (constraint == null || constraint.isEmpty()) {
-                    filterList.addAll(responseRepositoryAllData)
-                } else {
-
-                    // if search string is not empty show filtered items
-                    val searchString = constraint.toString().toLowerCase(Locale.getDefault()).trim()
-
-                    for (item: TrendingRepositoryResponseData in responseRepositoryAllData) {
-                        if (item.name.toLowerCase(Locale.getDefault()).contains(searchString)) {
-                            filterList.add(item)
-                        }
-                    }
-                }
-
-                val filterResult = FilterResults()
-                filterResult.values = filterList
-                return filterResult
-            }
-
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-
-                // append results
-                responseRepositoryData.clear()
-                responseRepositoryData.addAll(results!!.values as ArrayList<TrendingRepositoryResponseData>)
-                notifyDataSetChanged()
-            }
-
         }
     }
 }

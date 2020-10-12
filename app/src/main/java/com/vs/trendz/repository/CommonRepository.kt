@@ -3,6 +3,7 @@ package com.vs.trendz.repository
 import android.content.Context
 import android.os.AsyncTask
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import com.vs.trendz.api.APIServices
 import com.vs.trendz.api.RetrofitService
 import com.vs.trendz.model.TrendingRepositoryResponseData
@@ -21,7 +22,7 @@ import retrofit2.Response
 
 class CommonRepository private constructor(
     val context: Context,
-    private val appDatabase: AppDatabase,
+    appDatabase: AppDatabase,
     private val networkStatus: NetworkStatus
 ) {
 
@@ -60,7 +61,7 @@ class CommonRepository private constructor(
                     trendingResponse: Response<ArrayList<TrendingRepositoryResponseData>>
                 ) {
                     val body = trendingResponse.body()
-                    println("response ----\n$body\n")
+                    println("response ----\n${Gson().toJson(body)}\n")
                     try {
                         if (trendingResponse.isSuccessful && trendingResponse.body() != null) {
                             trendingRepositoryResponseData.value = body
@@ -69,7 +70,7 @@ class CommonRepository private constructor(
                         }
                     } catch (t: Exception) {
                         trendingRepositoryResponseData.value = null
-                        println("response ----\nError-----\n$t\n----")
+                        println("Error-----\n$t\n----")
                     }
                 }
 
@@ -78,9 +79,12 @@ class CommonRepository private constructor(
                     t: Throwable
                 ) {
                     trendingRepositoryResponseData.value = null
+                    println("Error-----\n$t\n----")
                 }
 
             })
+
+            println("Http End")
         }
     }
 

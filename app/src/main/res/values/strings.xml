@@ -12,11 +12,14 @@
     <string name="try_again">Try again</string>
 
 
-    <string name="error_state_message">Something went wrong, please try again later</string>
+        <string name="error_state_message">Unable to sync data, please try again</string>
     <string name="data_update_failed">@string/error_state_message</string>
 
     <string name="data_update_success">Sync successful</string>
 
     <string name="alert_no_network">Please check your data connection</string>
     <string name="no_network_connection">@string/alert_no_network</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_item_found">No result found</string>
 </resources>
