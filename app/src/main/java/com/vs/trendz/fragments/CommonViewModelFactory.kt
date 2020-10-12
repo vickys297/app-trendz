@@ -46,7 +46,12 @@ class CommonViewModelFactory(private val context: Context?) : ViewModelProvider.
             }
             else -> {
                 NoNetworkConnectionViewModel(
-                    context!!.applicationContext
+                    CommonRepository.getInstance(
+                        context!!,
+                        AppDatabase.getInstance(context),
+                        NetworkStatus.getInstance(context)
+                    ),
+                    context.applicationContext
                 ) as T
             }
         }
