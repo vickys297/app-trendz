@@ -12,10 +12,7 @@
         tools:layout="@layout/trending_repository_fragment">
         <action
             android:id="@+id/action_trendingRepositoryFragment_to_noNetworkConnectionFragment"
-            app:destination="@id/noNetworkConnectionFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/trendingRepositoryFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/noNetworkConnectionFragment" />
     </fragment>
 
     <fragment
